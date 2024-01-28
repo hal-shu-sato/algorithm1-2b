@@ -6,7 +6,6 @@ import Main from './main';
 export default function Home() {
   return (
     <Container as="main" className="my-3">
-      <h1>Sort Visualizer</h1>
       <Main />
     </Container>
   );
