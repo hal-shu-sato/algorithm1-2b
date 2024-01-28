@@ -3,7 +3,7 @@ function merge(
   into: number[],
   length: number,
   size: number,
-  print: (array: number[]) => void,
+  print?: (array: number[]) => void,
 ) {
   let start = 0;
   while (start < size) {
@@ -18,15 +18,15 @@ function merge(
       } else {
         into[k++] = from[j++];
       }
-      print(into);
+      if (print) print(into);
     }
     while (i < iEnd) {
       into[k++] = from[i++];
-      print(into);
+      if (print) print(into);
     }
     while (j < jEnd) {
       into[k++] = from[j++];
-      print(into);
+      if (print) print(into);
     }
     start += length + length;
   }
@@ -36,7 +36,7 @@ const mergeSort: SortFunc = (a, size, print) => {
   const b = new Array<number>(size);
   let length = 1;
   while (length < size) {
-    merge(a, b, length, size, print);
+    merge(a, b, length, size);
     merge(b, a, 2 * length, size, print);
     length *= 4;
   }
