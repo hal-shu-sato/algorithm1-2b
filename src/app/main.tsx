@@ -24,7 +24,7 @@ function FormRow({
   );
 }
 
-export default function Visualizer() {
+export default function Main() {
   const [size, setSize] = useState<number | null>(64);
   const [initialSort, setInitialSort] = useState('desc');
   const [sortAlgorithm, setSortAlgorithm] = useState('bubble');
