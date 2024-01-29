@@ -2,7 +2,14 @@
 
 import { useCallback, useEffect, useState } from 'react';
 
-import { Button, Col, Form, Row, type FormGroupProps } from 'react-bootstrap';
+import {
+  Button,
+  ButtonGroup,
+  Col,
+  Form,
+  Row,
+  type FormGroupProps,
+} from 'react-bootstrap';
 
 import bubbleSort from '@/sort-algorithm/bubble';
 import heapSort from '@/sort-algorithm/heap';
@@ -296,10 +303,10 @@ export default function Main() {
         </Col>
         <Col xs="12" lg="9">
           <Row className="my-2 gx-2">
-            {[
+            <ButtonGroup as={Col} xs="auto">
               <Button key="first" onClick={() => setHistoryIndex(0)}>
                 最初
-              </Button>,
+              </Button>
               <Button
                 key="back"
                 onClick={() =>
@@ -310,17 +317,17 @@ export default function Main() {
                 }
               >
                 前
-              </Button>,
+              </Button>
               <Button
                 key="play"
                 onClick={play}
                 {...(intervalId !== null ? { disabled: true } : [])}
               >
                 再生
-              </Button>,
+              </Button>
               <Button key="pause" onClick={pause}>
                 一時停止
-              </Button>,
+              </Button>
               <Button
                 key="next"
                 onClick={() =>
@@ -331,18 +338,14 @@ export default function Main() {
                 }
               >
                 次
-              </Button>,
+              </Button>
               <Button
                 key="last"
                 onClick={() => setHistoryIndex(visualizerState.historySize - 1)}
               >
                 最後
-              </Button>,
-            ].map((button, i) => (
-              <Col xs="auto" key={i}>
-                {button}
-              </Col>
-            ))}
+              </Button>
+            </ButtonGroup>
             <Col xs="auto" className="d-flex align-items-center">
               {visualizerState.historySize !== 0 ? (
                 <>
