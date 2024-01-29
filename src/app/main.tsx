@@ -116,6 +116,8 @@ export default function Main() {
   const [size, setSize] = useState<number | null>(64);
   const [initialSort, setInitialSort] = useState<initialSortType>('desc');
   const [sortAlgorithm, setSortAlgorithm] = useState('simple');
+  const [startColor, setStartColor] = useState('#000000');
+  const [endColor, setEndColor] = useState('#ffffff');
 
   const [visualizerState, setVisualizerState] = useState<{
     history: number[][];
@@ -248,6 +250,20 @@ export default function Main() {
           <div className="my-2 d-grid gap-2">
             <Button onClick={visualize}>実行</Button>
           </div>
+          <FormRow label="開始色">
+            <Form.Control
+              type="color"
+              value={startColor}
+              onChange={(event) => setStartColor(event.target.value)}
+            />
+          </FormRow>
+          <FormRow label="終了色">
+            <Form.Control
+              type="color"
+              value={endColor}
+              onChange={(event) => setEndColor(event.target.value)}
+            />
+          </FormRow>
         </Col>
         <Col xs="12" lg="9">
           <Row className="my-2 gx-2">
@@ -321,6 +337,8 @@ export default function Main() {
           <Visualizer
             array={visualizerState.history[historyIndex]}
             size={visualizerState.size}
+            startColor={startColor}
+            endColor={endColor}
           />
         </Col>
       </Row>
