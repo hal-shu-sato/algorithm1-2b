@@ -2,5 +2,11 @@
   background-color: black;
   position: absolute;
   bottom: 0;
-  padding-right: 2px;
+  padding-right: 1px;
+}
+
+@media (min-width: 576px) {
+  .element {
+    padding-right: 2px;
+  }
 }
