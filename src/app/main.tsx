@@ -123,18 +123,24 @@ function FormRow({
   children,
   className,
   label,
+  labelSpan = 3,
   ...props
-}: Readonly<FormGroupProps & { label: string }>) {
+}: Readonly<
+  FormGroupProps & {
+    label: string;
+    labelSpan?: number;
+  }
+>) {
   return (
     <Form.Group
       as={Row}
       className={className ? `my-2 ${className}` : 'my-2'}
       {...props}
     >
-      <Form.Label column xs="3">
+      <Form.Label column xs={labelSpan}>
         {label}
       </Form.Label>
-      <Col xs="9">{children}</Col>
+      <Col xs={12 - labelSpan}>{children}</Col>
     </Form.Group>
   );
 }
@@ -302,28 +308,32 @@ export default function Main() {
           <div className="my-2 d-grid gap-2">
             <Button onClick={visualize}>実行</Button>
           </div>
-          <FormRow label="開始色">
+          <FormRow label="開始色" labelSpan={6}>
             <Form.Control
               type="color"
               value={startColor}
               onChange={(event) => setStartColor(event.target.value)}
             />
           </FormRow>
-          <FormRow label="終了色">
+          <FormRow label="終了色" labelSpan={6}>
             <Form.Control
               type="color"
               value={endColor}
               onChange={(event) => setEndColor(event.target.value)}
             />
           </FormRow>
-          <FormRow label="背景色">
+          <FormRow label="背景色" labelSpan={6}>
             <Form.Control
               type="color"
               value={bgColor}
               onChange={(event) => setBgColor(event.target.value)}
             />
           </FormRow>
-          <FormRow label="1stepあたりのミリ秒数" controlId="elementSize">
+          <FormRow
+            label="1stepあたりのミリ秒数"
+            controlId="elementSize"
+            labelSpan={6}
+          >
             <Form.Control
               type="number"
               min={1}
