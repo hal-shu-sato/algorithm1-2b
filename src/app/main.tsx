@@ -119,6 +119,7 @@ export default function Main() {
   const [startColor, setStartColor] = useState('#ff0000');
   const [endColor, setEndColor] = useState('#ffff00');
   const [bgColor, setBgColor] = useState('#000000');
+  const [timePerStep, setTimePerStep] = useState<number | null>(10);
 
   const [visualizerState, setVisualizerState] = useState<{
     history: number[][];
@@ -158,10 +159,10 @@ export default function Main() {
           if (prev + 1 < visualizerState.historySize) return prev + 1;
           return prev;
         });
-      }, 10);
+      }, timePerStep ?? 1);
       setIntervalId(interval);
     }
-  }, [intervalId, visualizerState.historySize]);
+  }, [intervalId, visualizerState.historySize, timePerStep]);
 
   const pause = useCallback(() => {
     if (intervalId !== null) {
@@ -270,6 +271,26 @@ export default function Main() {
               type="color"
               value={bgColor}
               onChange={(event) => setBgColor(event.target.value)}
+            />
+          </FormRow>
+          <FormRow label="1stepあたりのミリ秒数" controlId="elementSize">
+            <Form.Control
+              type="number"
+              min={1}
+              value={timePerStep === null ? '' : timePerStep}
+              onChange={(event) => {
+                const value = event.target.value;
+                if (value === '') {
+                  setTimePerStep(null);
+                } else {
+                  const valueAsNumber = Number(value);
+                  if (valueAsNumber < 1) {
+                    setTimePerStep(1);
+                  } else {
+                    setTimePerStep(valueAsNumber);
+                  }
+                }
+              }}
             />
           </FormRow>
         </Col>
