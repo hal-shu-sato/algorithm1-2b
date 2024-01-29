@@ -118,6 +118,7 @@ export default function Main() {
   const [sortAlgorithm, setSortAlgorithm] = useState('simple');
   const [startColor, setStartColor] = useState('#000000');
   const [endColor, setEndColor] = useState('#ffffff');
+  const [bgColor, setBgColor] = useState('#888888');
 
   const [visualizerState, setVisualizerState] = useState<{
     history: number[][];
@@ -264,6 +265,13 @@ export default function Main() {
               onChange={(event) => setEndColor(event.target.value)}
             />
           </FormRow>
+          <FormRow label="背景色">
+            <Form.Control
+              type="color"
+              value={bgColor}
+              onChange={(event) => setBgColor(event.target.value)}
+            />
+          </FormRow>
         </Col>
         <Col xs="12" lg="9">
           <Row className="my-2 gx-2">
@@ -339,6 +347,7 @@ export default function Main() {
             size={visualizerState.size}
             startColor={startColor}
             endColor={endColor}
+            bgColor={bgColor}
           />
         </Col>
       </Row>

@@ -21,11 +21,13 @@ export default function Visualizer({
   size,
   startColor,
   endColor,
+  bgColor,
 }: {
   array: number[];
   size: number;
   startColor: string;
   endColor: string;
+  bgColor: string;
 }) {
   if (size === 0 || !Array.isArray(array)) return null;
 
@@ -35,7 +37,7 @@ export default function Visualizer({
   return (
     <div className={styles.visualizerContainer}>
       <Ratio aspectRatio="16x9">
-        <div className={styles.visualizer}>
+        <div className={styles.visualizer} style={{ backgroundColor: bgColor }}>
           {array.map((value, i) => (
             <div
               key={i}
