@@ -389,7 +389,7 @@ export default function Main() {
                 最後
               </Button>
             </ButtonGroup>
-            <Col xs="auto" className="d-flex align-items-center">
+            <Col className="d-flex align-items-center">
               {visualizerState.historySize !== 0 ? (
                 <>
                   <Form.Range
@@ -400,7 +400,7 @@ export default function Main() {
                       setHistoryIndex(Number(event.target.value) - 1);
                     }}
                   />
-                  <div>
+                  <div className="text-nowrap">
                     {historyIndex + 1} / {visualizerState.historySize} steps
                   </div>
                 </>
