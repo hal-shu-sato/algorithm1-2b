@@ -116,9 +116,9 @@ export default function Main() {
   const [size, setSize] = useState<number | null>(64);
   const [initialSort, setInitialSort] = useState<initialSortType>('desc');
   const [sortAlgorithm, setSortAlgorithm] = useState('simple');
-  const [startColor, setStartColor] = useState('#000000');
-  const [endColor, setEndColor] = useState('#ffffff');
-  const [bgColor, setBgColor] = useState('#888888');
+  const [startColor, setStartColor] = useState('#ff0000');
+  const [endColor, setEndColor] = useState('#ffff00');
+  const [bgColor, setBgColor] = useState('#000000');
 
   const [visualizerState, setVisualizerState] = useState<{
     history: number[][];
