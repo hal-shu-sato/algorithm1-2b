@@ -37,7 +37,7 @@ export default function Visualizer({
   return (
     <div className={styles.visualizerContainer}>
       <Ratio aspectRatio="16x9">
-        <div className={styles.visualizer} style={{ backgroundColor: bgColor }}>
+        <div style={{ backgroundColor: bgColor }}>
           {array.map((value, i) => (
             <div
               key={i}
@@ -45,7 +45,7 @@ export default function Visualizer({
               style={{
                 width: `${100 / size}%`,
                 height: `${(100 * value) / size}%`,
-                left: `${(100 * value) / size}%`,
+                left: `${(100 * i) / size}%`,
                 backgroundColor: getRGBDec(
                   startColorRGB.red +
                     ((endColorRGB.red - startColorRGB.red) * value) / size,

@@ -1,9 +1,6 @@
-.visualizer {
-  display: flex;
-  align-items: flex-end;
-}
-
 .element {
   background-color: black;
-  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  padding-right: 2px;
 }
