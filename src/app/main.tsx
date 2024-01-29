@@ -55,6 +55,21 @@ function getInitialArray(size: number, initialSort: initialSortType) {
 }
 
 /**
+ * swap関数の型
+ */
+type SwapFunc = typeof swap;
+
+/**
+ * カスタムソートアルゴリズム関数の型
+ */
+type CustomSortFunc = (
+  array: SortFuncParams[0],
+  size: SortFuncParams[1],
+  print: SortFuncParams[2],
+  swap: SwapFunc,
+) => void;
+
+/**
  * ソートアルゴリズムを実行する
  */
 function sort(
@@ -62,6 +77,7 @@ function sort(
   array: number[],
   size: number,
   print: (array: number[]) => void,
+  customSort?: CustomSortFunc,
 ) {
   switch (sortAlgorithm) {
     case 'simple':
@@ -87,6 +103,10 @@ function sort(
       break;
     case 'merge':
       mergeSort(array, size, print);
+      break;
+    case 'custom':
+      if (typeof customSort === 'function')
+        customSort(array, size, print, swap);
       break;
     default:
       console.log('invalid sort algorithm');
@@ -123,6 +143,7 @@ export default function Main() {
   const [size, setSize] = useState<number | null>(64);
   const [initialSort, setInitialSort] = useState<initialSortType>('desc');
   const [sortAlgorithm, setSortAlgorithm] = useState('simple');
+  const [customAlgorithm, setCustomAlgorithm] = useState('');
   const [startColor, setStartColor] = useState('#ff0000');
   const [endColor, setEndColor] = useState('#ffff00');
   const [bgColor, setBgColor] = useState('#000000');
@@ -148,7 +169,14 @@ export default function Main() {
     const array = getInitialArray(size ?? 0, initialSort);
     print(array);
 
-    sort(sortAlgorithm, array, size ?? 0, print);
+    if (sortAlgorithm === 'custom') {
+      const customSort = eval(
+        '(array, size, print, swap) => {' + customAlgorithm + '}',
+      ) as CustomSortFunc;
+      sort(sortAlgorithm, array, size ?? 0, print, customSort);
+    } else {
+      sort(sortAlgorithm, array, size ?? 0, print);
+    }
 
     setVisualizerState({
       history,
@@ -254,7 +282,22 @@ export default function Main() {
               <option value="bin" disabled>
                 ビンソート
               </option>
+              <option value="custom">カスタム...</option>
             </Form.Select>
+          </FormRow>
+          <FormRow
+            label="カスタムソートアルゴリズム"
+            controlId="customAlgorithm"
+            className={sortAlgorithm === 'custom' ? '' : 'd-none'}
+          >
+            <div>function customSort (array, size, print, swap) {'{'}</div>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              value={customAlgorithm}
+              onChange={(event) => setCustomAlgorithm(event.target.value)}
+            />
+            <div>{'}'}</div>
           </FormRow>
           <div className="my-2 d-grid gap-2">
             <Button onClick={visualize}>実行</Button>
