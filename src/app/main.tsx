@@ -308,21 +308,21 @@ export default function Main() {
           <div className="my-2 d-grid gap-2">
             <Button onClick={visualize}>実行</Button>
           </div>
-          <FormRow label="開始色" labelSpan={6}>
+          <FormRow label="開始色" controlId="startColor" labelSpan={6}>
             <Form.Control
               type="color"
               value={startColor}
               onChange={(event) => setStartColor(event.target.value)}
             />
           </FormRow>
-          <FormRow label="終了色" labelSpan={6}>
+          <FormRow label="終了色" controlId="endColor" labelSpan={6}>
             <Form.Control
               type="color"
               value={endColor}
               onChange={(event) => setEndColor(event.target.value)}
             />
           </FormRow>
-          <FormRow label="背景色" labelSpan={6}>
+          <FormRow label="背景色" controlId="bgColor" labelSpan={6}>
             <Form.Control
               type="color"
               value={bgColor}
@@ -331,7 +331,7 @@ export default function Main() {
           </FormRow>
           <FormRow
             label="1stepあたりのミリ秒数"
-            controlId="elementSize"
+            controlId="timePerStep"
             labelSpan={6}
           >
             <Form.Control
