@@ -32,12 +32,25 @@ import Visualizer from './visualizer';
 /**
  * 初期ソートの種類
  */
-type initialSortType = 'desc' | 'asc' | 'random';
+type initialSortType = 'desc' | 'asc' | 'random' | 'custom';
 
 /**
  * 初期配列を生成する
  */
-function getInitialArray(size: number, initialSort: initialSortType) {
+function getInitialArray(
+  size: number,
+  initialSort: initialSortType,
+  customArray: string,
+) {
+  if (initialSort === 'custom') {
+    return customArray
+      .split(',')
+      .map((s) => s.trim())
+      .filter((s) => s !== '')
+      .map((s) => Number(s))
+      .slice(0, 512);
+  }
+
   const array = Array(size)
     .fill(undefined)
     .map((_, i) => i + 1);
@@ -158,6 +171,7 @@ function FormRow({
 export default function Main() {
   const [size, setSize] = useState<number | null>(64);
   const [initialSort, setInitialSort] = useState<initialSortType>('desc');
+  const [customInitialArray, setCustomInitialArray] = useState('');
   const [sortAlgorithm, setSortAlgorithm] = useState('simple');
   const [customAlgorithm, setCustomAlgorithm] = useState('');
   const [startColor, setStartColor] = useState('#ff0000');
@@ -182,7 +196,7 @@ export default function Main() {
       history.push([...array]);
     };
 
-    const array = getInitialArray(size ?? 0, initialSort);
+    const array = getInitialArray(size ?? 0, initialSort, customInitialArray);
     print(array);
 
     if (sortAlgorithm === 'custom') {
@@ -257,6 +271,7 @@ export default function Main() {
                   }
                 }
               }}
+              {...(initialSort === 'custom' ? { disabled: true } : [])}
             />
           </FormRow>
           <FormRow label="初期列" controlId="initialSort">
@@ -264,6 +279,11 @@ export default function Main() {
               value={initialSort}
               onChange={(event) => {
                 switch (event.target.value) {
+                  case 'custom':
+                    setSize(
+                      getInitialArray(512, 'custom', customInitialArray).length,
+                    );
+                  // eslint-disable-next-line no-fallthrough
                   case 'desc':
                   case 'asc':
                   case 'random':
@@ -277,7 +297,30 @@ export default function Main() {
               <option value="desc">降順</option>
               <option value="asc">昇順</option>
               <option value="random">乱数</option>
+              <option value="custom">カスタム...</option>
             </Form.Select>
+          </FormRow>
+          <FormRow
+            label="カスタム初期列"
+            controlId="customInitialArray"
+            className={initialSort === 'custom' ? '' : 'd-none'}
+          >
+            <InputGroup>
+              <InputGroup.Text>[</InputGroup.Text>
+              <Form.Control
+                value={customInitialArray}
+                onChange={(event) => {
+                  setCustomInitialArray(event.target.value);
+                  const arraySize = getInitialArray(
+                    512,
+                    'custom',
+                    event.target.value,
+                  ).length;
+                  setSize(arraySize);
+                }}
+              />
+              <InputGroup.Text>]</InputGroup.Text>
+            </InputGroup>
           </FormRow>
           <FormRow label="アルゴリズム" controlId="sortAlgorithm">
             <Form.Select

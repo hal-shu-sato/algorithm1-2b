@@ -31,6 +31,8 @@ export default function Visualizer({
 }) {
   if (size === 0 || !Array.isArray(array)) return null;
 
+  const max = Math.max(...array);
+
   const startColorRGB = parseRGBHex(startColor);
   const endColorRGB = parseRGBHex(endColor);
 
@@ -44,15 +46,15 @@ export default function Visualizer({
               className={styles.element}
               style={{
                 width: `${100 / size}%`,
-                height: `${(100 * value) / size}%`,
+                height: `${(100 * value) / max}%`,
                 left: `${(100 * i) / size}%`,
                 backgroundColor: getRGBDec(
                   startColorRGB.red +
-                    ((endColorRGB.red - startColorRGB.red) * value) / size,
+                    ((endColorRGB.red - startColorRGB.red) * value) / max,
                   startColorRGB.green +
-                    ((endColorRGB.green - startColorRGB.green) * value) / size,
+                    ((endColorRGB.green - startColorRGB.green) * value) / max,
                   startColorRGB.blue +
-                    ((endColorRGB.blue - startColorRGB.blue) * value) / size,
+                    ((endColorRGB.blue - startColorRGB.blue) * value) / max,
                 ),
               }}
             />
