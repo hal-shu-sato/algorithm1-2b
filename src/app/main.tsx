@@ -187,37 +187,6 @@ export default function Main() {
   }>({ history: [], historySize: 0, size: 0, max: 0 });
   const [historyIndex, setHistoryIndex] = useState(0);
 
-  const visualize = () => {
-    // initialize
-    pause();
-    setHistoryIndex(0);
-
-    const history: number[][] = [];
-    const print = (array: number[]) => {
-      history.push([...array]);
-    };
-
-    const array = getInitialArray(size ?? 0, initialSort, customInitialArray);
-    print(array); // step 0
-    const max = Math.max(...array);
-
-    if (sortAlgorithm === 'custom') {
-      const customSort = eval(
-        '(array, size, print, swap) => {' + customAlgorithm + '}',
-      ) as CustomSortFunc;
-      sort(sortAlgorithm, array, size ?? 0, print, customSort);
-    } else {
-      sort(sortAlgorithm, array, size ?? 0, print);
-    }
-
-    setVisualizerState({
-      history,
-      historySize: history.length,
-      size: size ?? 0,
-      max,
-    });
-  };
-
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
 
   const play = useCallback(() => {
@@ -247,6 +216,44 @@ export default function Main() {
       pause();
     }
   }, [intervalId, historyIndex, visualizerState.historySize, pause]);
+
+  const visualize = useCallback(() => {
+    // initialize
+    pause();
+    setHistoryIndex(0);
+
+    const history: number[][] = [];
+    const print = (array: number[]) => {
+      history.push([...array]);
+    };
+
+    const array = getInitialArray(size ?? 0, initialSort, customInitialArray);
+    print(array); // step 0
+    const max = Math.max(...array);
+
+    if (sortAlgorithm === 'custom') {
+      const customSort = eval(
+        '(array, size, print, swap) => {' + customAlgorithm + '}',
+      ) as CustomSortFunc;
+      sort(sortAlgorithm, array, size ?? 0, print, customSort);
+    } else {
+      sort(sortAlgorithm, array, size ?? 0, print);
+    }
+
+    setVisualizerState({
+      history,
+      historySize: history.length,
+      size: size ?? 0,
+      max,
+    });
+  }, [
+    pause,
+    size,
+    initialSort,
+    customInitialArray,
+    sortAlgorithm,
+    customAlgorithm,
+  ]);
 
   return (
     <>
