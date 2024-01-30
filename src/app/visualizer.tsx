@@ -1,6 +1,6 @@
 import { Ratio } from 'react-bootstrap';
 
-import styles from './page.module.css';
+import styles from './visualizer.module.css';
 
 function parseRGBHex(hex: string) {
   const m = hex.match(/^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i);
