@@ -45,9 +45,9 @@ function getInitialArray(
   if (initialSort === 'custom') {
     return customArray
       .split(',')
-      .map((s) => s.trim())
-      .filter((s) => s !== '')
+      .filter((s) => s.trim() !== '')
       .map((s) => Number(s))
+      .filter((n) => !Number.isNaN(n))
       .slice(0, 512);
   }
 
