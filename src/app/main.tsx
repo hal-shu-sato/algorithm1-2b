@@ -12,6 +12,7 @@ import {
 } from 'react-bootstrap';
 
 import bubbleSort from '@/sort-algorithm/bubble';
+import countSort from '@/sort-algorithm/count';
 import heapSort from '@/sort-algorithm/heap';
 import insertionSort from '@/sort-algorithm/insertion';
 import mergeSort from '@/sort-algorithm/merge';
@@ -103,6 +104,9 @@ function sort(
       break;
     case 'merge':
       mergeSort(array, size, print);
+      break;
+    case 'count':
+      countSort(array, size, print);
       break;
     case 'custom':
       if (typeof customSort === 'function')
@@ -282,9 +286,7 @@ export default function Main() {
               <option value="quick">クイックソート</option>
               <option value="heap">ヒープソート</option>
               <option value="merge">マージソート</option>
-              <option value="count" disabled>
-                カウントソート
-              </option>
+              <option value="count">カウントソート（不完全）</option>
               <option value="bin" disabled>
                 ビンソート
               </option>
