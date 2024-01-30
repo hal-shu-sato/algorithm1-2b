@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import {
+  Accordion,
   Button,
   ButtonGroup,
   Col,
@@ -142,7 +143,7 @@ function FormRow({
   return (
     <Form.Group
       as={Row}
-      className={className ? `my-2 ${className}` : 'my-2'}
+      className={className ? `mb-2 ${className}` : 'mb-2'}
       {...props}
     >
       <Form.Label column xs={labelSpan}>
@@ -309,57 +310,64 @@ export default function Main() {
             />
             <div>{'}'}</div>
           </FormRow>
-          <div className="my-2 d-grid gap-2">
+          <div className="mb-2 d-grid gap-2">
             <Button onClick={visualize}>実行</Button>
           </div>
-          <FormRow label="開始色" controlId="startColor" labelSpan={6}>
-            <Form.Control
-              type="color"
-              value={startColor}
-              onChange={(event) => setStartColor(event.target.value)}
-            />
-          </FormRow>
-          <FormRow label="終了色" controlId="endColor" labelSpan={6}>
-            <Form.Control
-              type="color"
-              value={endColor}
-              onChange={(event) => setEndColor(event.target.value)}
-            />
-          </FormRow>
-          <FormRow label="背景色" controlId="bgColor" labelSpan={6}>
-            <Form.Control
-              type="color"
-              value={bgColor}
-              onChange={(event) => setBgColor(event.target.value)}
-            />
-          </FormRow>
-          <FormRow
-            label="1stepあたりのミリ秒数"
-            controlId="timePerStep"
-            labelSpan={6}
-          >
-            <Form.Control
-              type="number"
-              min={1}
-              value={timePerStep === null ? '' : timePerStep}
-              onChange={(event) => {
-                const value = event.target.value;
-                if (value === '') {
-                  setTimePerStep(null);
-                } else {
-                  const valueAsNumber = Number(value);
-                  if (valueAsNumber < 1) {
-                    setTimePerStep(1);
-                  } else {
-                    setTimePerStep(valueAsNumber);
-                  }
-                }
-              }}
-            />
-          </FormRow>
+          <Accordion className="mb-2">
+            <Accordion.Item eventKey="customize">
+              <Accordion.Header>カスタマイズ</Accordion.Header>
+              <Accordion.Body>
+                <FormRow label="開始色" controlId="startColor" labelSpan={6}>
+                  <Form.Control
+                    type="color"
+                    value={startColor}
+                    onChange={(event) => setStartColor(event.target.value)}
+                  />
+                </FormRow>
+                <FormRow label="終了色" controlId="endColor" labelSpan={6}>
+                  <Form.Control
+                    type="color"
+                    value={endColor}
+                    onChange={(event) => setEndColor(event.target.value)}
+                  />
+                </FormRow>
+                <FormRow label="背景色" controlId="bgColor" labelSpan={6}>
+                  <Form.Control
+                    type="color"
+                    value={bgColor}
+                    onChange={(event) => setBgColor(event.target.value)}
+                  />
+                </FormRow>
+                <FormRow
+                  label="1stepあたりのミリ秒数"
+                  controlId="timePerStep"
+                  labelSpan={6}
+                >
+                  <Form.Control
+                    type="number"
+                    min={1}
+                    value={timePerStep === null ? '' : timePerStep}
+                    onChange={(event) => {
+                      const value = event.target.value;
+                      if (value === '') {
+                        setTimePerStep(null);
+                      } else {
+                        const valueAsNumber = Number(value);
+                        if (valueAsNumber < 1) {
+                          setTimePerStep(1);
+                        } else {
+                          setTimePerStep(valueAsNumber);
+                        }
+                      }
+                    }}
+                  />
+                </FormRow>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
         </Col>
         <Col xs="12" lg="9">
-          <Row className="my-2 gx-2">
+          <Row className="mb-2 gx-2">
             <ButtonGroup as={Col} xs="auto">
               <Button key="first" onClick={() => setHistoryIndex(0)}>
                 最初
