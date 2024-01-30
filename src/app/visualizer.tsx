@@ -19,19 +19,19 @@ function getRGBDec(red: number, green: number, blue: number) {
 export default function Visualizer({
   array,
   size,
+  max,
   startColor,
   endColor,
   bgColor,
 }: {
   array: number[];
   size: number;
+  max: number;
   startColor: string;
   endColor: string;
   bgColor: string;
 }) {
   if (size === 0 || !Array.isArray(array)) return null;
-
-  const max = Math.max(...array);
 
   const startColorRGB = parseRGBHex(startColor);
   const endColorRGB = parseRGBHex(endColor);

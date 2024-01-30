@@ -183,7 +183,8 @@ export default function Main() {
     history: number[][];
     historySize: number;
     size: number;
-  }>({ history: [], historySize: 0, size: 0 });
+    max: number;
+  }>({ history: [], historySize: 0, size: 0, max: 0 });
   const [historyIndex, setHistoryIndex] = useState(0);
 
   const visualize = () => {
@@ -198,6 +199,7 @@ export default function Main() {
 
     const array = getInitialArray(size ?? 0, initialSort, customInitialArray);
     print(array); // step 0
+    const max = Math.max(...array);
 
     if (sortAlgorithm === 'custom') {
       const customSort = eval(
@@ -212,6 +214,7 @@ export default function Main() {
       history,
       historySize: history.length,
       size: size ?? 0,
+      max,
     });
   };
 
@@ -481,6 +484,7 @@ export default function Main() {
           <Visualizer
             array={visualizerState.history[historyIndex]}
             size={visualizerState.size}
+            max={visualizerState.max}
             startColor={startColor}
             endColor={endColor}
             bgColor={bgColor}
