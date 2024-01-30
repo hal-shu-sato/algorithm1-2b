@@ -278,7 +278,7 @@ export default function Main() {
               <option value="random">乱数</option>
             </Form.Select>
           </FormRow>
-          <FormRow label="ソートアルゴリズム" controlId="sortAlgorithm">
+          <FormRow label="アルゴリズム" controlId="sortAlgorithm">
             <Form.Select
               value={sortAlgorithm}
               onChange={(event) => setSortAlgorithm(event.target.value)}
