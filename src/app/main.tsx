@@ -258,7 +258,7 @@ export default function Main() {
               }}
             />
           </FormRow>
-          <FormRow label="初期状態" controlId="initialSort">
+          <FormRow label="初期列" controlId="initialSort">
             <Form.Select
               value={initialSort}
               onChange={(event) => {
