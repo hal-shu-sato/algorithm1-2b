@@ -132,7 +132,7 @@ function FormRow({
   children,
   className,
   label,
-  labelSpan = 3,
+  labelSpan = 4,
   ...props
 }: Readonly<
   FormGroupProps & {
