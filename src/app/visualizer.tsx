@@ -37,7 +37,7 @@ export default function Visualizer({
   const endColorRGB = parseRGBHex(endColor);
 
   return (
-    <Ratio aspectRatio="16x9">
+    <Ratio aspectRatio="16x9" className={styles.container}>
       <div style={{ backgroundColor: bgColor }}>
         {array.map((value, i) => (
           <div
