@@ -37,30 +37,28 @@ export default function Visualizer({
   const endColorRGB = parseRGBHex(endColor);
 
   return (
-    <div className={styles.visualizerContainer}>
-      <Ratio aspectRatio="16x9">
-        <div style={{ backgroundColor: bgColor }}>
-          {array.map((value, i) => (
-            <div
-              key={i}
-              className={styles.element}
-              style={{
-                width: `${100 / size}%`,
-                height: `${(100 * value) / max}%`,
-                left: `${(100 * i) / size}%`,
-                backgroundColor: getRGBDec(
-                  startColorRGB.red +
-                    ((endColorRGB.red - startColorRGB.red) * value) / max,
-                  startColorRGB.green +
-                    ((endColorRGB.green - startColorRGB.green) * value) / max,
-                  startColorRGB.blue +
-                    ((endColorRGB.blue - startColorRGB.blue) * value) / max,
-                ),
-              }}
-            />
-          ))}
-        </div>
-      </Ratio>
-    </div>
+    <Ratio aspectRatio="16x9">
+      <div style={{ backgroundColor: bgColor }}>
+        {array.map((value, i) => (
+          <div
+            key={i}
+            className={styles.element}
+            style={{
+              width: `${100 / size}%`,
+              height: `${(100 * value) / max}%`,
+              left: `${(100 * i) / size}%`,
+              backgroundColor: getRGBDec(
+                startColorRGB.red +
+                  ((endColorRGB.red - startColorRGB.red) * value) / max,
+                startColorRGB.green +
+                  ((endColorRGB.green - startColorRGB.green) * value) / max,
+                startColorRGB.blue +
+                  ((endColorRGB.blue - startColorRGB.blue) * value) / max,
+              ),
+            }}
+          />
+        ))}
+      </div>
+    </Ratio>
   );
 }
