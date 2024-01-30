@@ -11,6 +11,7 @@ import {
   type FormGroupProps,
 } from 'react-bootstrap';
 
+import binSort from '@/sort-algorithm/bin';
 import bubbleSort from '@/sort-algorithm/bubble';
 import countSort from '@/sort-algorithm/count';
 import heapSort from '@/sort-algorithm/heap';
@@ -107,6 +108,9 @@ function sort(
       break;
     case 'count':
       countSort(array, size, print);
+      break;
+    case 'bin':
+      binSort(array, size, print);
       break;
     case 'custom':
       if (typeof customSort === 'function')
@@ -287,9 +291,7 @@ export default function Main() {
               <option value="heap">ヒープソート</option>
               <option value="merge">マージソート</option>
               <option value="count">カウントソート（不完全）</option>
-              <option value="bin" disabled>
-                ビンソート
-              </option>
+              <option value="bin">ビンソート（不完全）</option>
               <option value="custom">カスタム...</option>
             </Form.Select>
           </FormRow>
