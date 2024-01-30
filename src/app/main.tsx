@@ -248,7 +248,7 @@ export default function Main() {
   return (
     <>
       <Row>
-        <Col xs="12" lg="3">
+        <Col xs="12" md="5" lg="4" xxl="3">
           <h1>Sort Visualizer</h1>
           <FormRow label="要素数" controlId="elementSize">
             <Form.Control
@@ -413,7 +413,7 @@ export default function Main() {
             </Accordion.Item>
           </Accordion>
         </Col>
-        <Col xs="12" lg="9">
+        <Col xs="12" md="7" lg="8" xxl="9">
           <Row className="mb-2 gx-2">
             <ButtonGroup as={Col} xs="auto">
               <Button key="first" onClick={() => setHistoryIndex(0)}>
