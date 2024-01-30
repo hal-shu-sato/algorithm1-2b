@@ -8,6 +8,7 @@ import {
   ButtonGroup,
   Col,
   Form,
+  InputGroup,
   Row,
   type FormGroupProps,
 } from 'react-bootstrap';
@@ -339,28 +340,31 @@ export default function Main() {
                   />
                 </FormRow>
                 <FormRow
-                  label="1stepあたりのミリ秒数"
+                  label="1stepあたり"
                   controlId="timePerStep"
                   labelSpan={6}
                 >
-                  <Form.Control
-                    type="number"
-                    min={1}
-                    value={timePerStep === null ? '' : timePerStep}
-                    onChange={(event) => {
-                      const value = event.target.value;
-                      if (value === '') {
-                        setTimePerStep(null);
-                      } else {
-                        const valueAsNumber = Number(value);
-                        if (valueAsNumber < 1) {
-                          setTimePerStep(1);
+                  <InputGroup>
+                    <Form.Control
+                      type="number"
+                      min={1}
+                      value={timePerStep === null ? '' : timePerStep}
+                      onChange={(event) => {
+                        const value = event.target.value;
+                        if (value === '') {
+                          setTimePerStep(null);
                         } else {
-                          setTimePerStep(valueAsNumber);
+                          const valueAsNumber = Number(value);
+                          if (valueAsNumber < 1) {
+                            setTimePerStep(1);
+                          } else {
+                            setTimePerStep(valueAsNumber);
+                          }
                         }
-                      }
-                    }}
-                  />
+                      }}
+                    />
+                    <InputGroup.Text>ms</InputGroup.Text>
+                  </InputGroup>
                 </FormRow>
               </Accordion.Body>
             </Accordion.Item>
