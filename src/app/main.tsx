@@ -478,6 +478,7 @@ export default function Main() {
                     onChange={(event) => {
                       setHistoryIndex(Number(event.target.value));
                     }}
+                    className="me-2"
                   />
                   <div className="text-nowrap">
                     {historyIndex} / {visualizerState.historySize - 1} steps
