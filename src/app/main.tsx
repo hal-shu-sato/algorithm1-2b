@@ -197,7 +197,7 @@ export default function Main() {
     };
 
     const array = getInitialArray(size ?? 0, initialSort, customInitialArray);
-    print(array);
+    print(array); // step 0
 
     if (sortAlgorithm === 'custom') {
       const customSort = eval(
@@ -462,15 +462,15 @@ export default function Main() {
               {visualizerState.historySize !== 0 ? (
                 <>
                   <Form.Range
-                    value={historyIndex + 1}
-                    min={1}
-                    max={visualizerState.historySize}
+                    value={historyIndex}
+                    min={0}
+                    max={visualizerState.historySize - 1}
                     onChange={(event) => {
-                      setHistoryIndex(Number(event.target.value) - 1);
+                      setHistoryIndex(Number(event.target.value));
                     }}
                   />
                   <div className="text-nowrap">
-                    {historyIndex + 1} / {visualizerState.historySize} steps
+                    {historyIndex} / {visualizerState.historySize - 1} steps
                   </div>
                 </>
               ) : (
