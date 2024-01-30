@@ -298,7 +298,7 @@ export default function Main() {
             </Form.Select>
           </FormRow>
           <FormRow
-            label="カスタムソートアルゴリズム"
+            label="カスタムアルゴリズム"
             controlId="customAlgorithm"
             className={sortAlgorithm === 'custom' ? '' : 'd-none'}
           >
