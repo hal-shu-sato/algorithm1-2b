@@ -2,7 +2,7 @@ import path from 'node:path';
 
 /** @type {import('lint-staged').ConfigFn} */
 const buildEslintCommand = (filenames) =>
-  `next lint --fix --file ${filenames
+  `eslint --fix ${filenames
     .map((f) => path.relative(process.cwd(), f))
     .join(' --file ')}`;
 const prettierCommand = 'prettier --write';
