@@ -8,7 +8,7 @@ const buildEslintCommand = (filenames) =>
 const prettierCommand = 'prettier --write';
 
 /** @type {import('lint-staged').Configuration} */
-export default {
+const config = {
   '*.{ts,tsx}': [
     () => 'tsc --incremental false --noEmit',
     buildEslintCommand,
@@ -17,3 +17,5 @@ export default {
   '*.{js,jsx}': [buildEslintCommand, prettierCommand],
   '*.{json,yml,md,html,css,scss}': prettierCommand,
 };
+
+export default config;
