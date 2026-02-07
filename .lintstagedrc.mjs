@@ -1,13 +1,13 @@
 import path from 'node:path';
 
-/** @type {import('lint-staged').ConfigFn} */
+/** @type {import('lint-staged').SyncGenerateTask} */
 const buildEslintCommand = (filenames) =>
   `eslint --fix ${filenames
     .map((f) => path.relative(process.cwd(), f))
     .join(' --file ')}`;
 const prettierCommand = 'prettier --write';
 
-/** @type {import('lint-staged').Config} */
+/** @type {import('lint-staged').Configuration} */
 export default {
   '*.{ts,tsx}': [
     () => 'tsc --incremental false --noEmit',
