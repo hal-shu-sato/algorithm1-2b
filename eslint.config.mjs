@@ -1,35 +1,34 @@
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-import { FlatCompat } from '@eslint/eslintrc';
 import pluginJs from '@eslint/js';
+import { defineConfig, globalIgnores } from 'eslint/config';
+import nextVitals from 'eslint-config-next/core-web-vitals';
+import nextTs from 'eslint-config-next/typescript';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import tseslint from 'typescript-eslint';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-export default [
-  {
-    ignores: ['**/node_modules/'],
-  },
+const eslintConfig = defineConfig(
   pluginJs.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  tseslint.configs.recommendedTypeChecked,
+  nextVitals,
+  nextTs,
+  // Override default ignores of eslint-config-next.
+  globalIgnores([
+    'node_modules/**',
+    // Default ignores of eslint-config-next:
+    '.next/**',
+    'out/**',
+    'build/**',
+    'next-env.d.ts',
+  ]),
   {
     languageOptions: {
-      ecmaVersion: 2017,
-      sourceType: 'script',
-
       parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
+        projectService: {
+          allowDefaultProject: ['*.js', '*.mjs'],
+        },
       },
     },
-
+  },
+  {
     rules: {
       'import/order': [
         'error',
@@ -76,4 +75,6 @@ export default [
     },
   },
   eslintConfigPrettier,
-];
+);
+
+export default eslintConfig;
