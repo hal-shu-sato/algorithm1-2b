@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import {
   Accordion,
@@ -8,9 +8,9 @@ import {
   ButtonGroup,
   Col,
   Form,
+  type FormGroupProps,
   InputGroup,
   Row,
-  type FormGroupProps,
 } from 'react-bootstrap';
 
 import binSort from '@/sort-algorithm/bin';
@@ -192,10 +192,16 @@ export default function Main() {
   const play = useCallback(() => {
     if (intervalId === null) {
       const interval = setInterval(() => {
+        let reachedEnd = false;
         setHistoryIndex((prev) => {
           if (prev + 1 < visualizerState.historySize) return prev + 1;
+          reachedEnd = true;
           return prev;
         });
+        if (reachedEnd) {
+          clearInterval(interval);
+          setIntervalId(null);
+        }
       }, timePerStep ?? 1);
       setIntervalId(interval);
     }
@@ -207,15 +213,6 @@ export default function Main() {
       setIntervalId(null);
     }
   }, [intervalId]);
-
-  useEffect(() => {
-    if (
-      intervalId !== null &&
-      historyIndex + 1 >= visualizerState.historySize
-    ) {
-      pause();
-    }
-  }, [intervalId, historyIndex, visualizerState.historySize, pause]);
 
   const visualize = useCallback(() => {
     // initialize
