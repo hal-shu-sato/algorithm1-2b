@@ -1,8 +1,8 @@
 import pluginJs from '@eslint/js';
-import { defineConfig, globalIgnores } from 'eslint/config';
 import nextVitals from 'eslint-config-next/core-web-vitals';
 import nextTs from 'eslint-config-next/typescript';
 import eslintConfigPrettier from 'eslint-config-prettier';
+import { defineConfig, globalIgnores } from 'eslint/config';
 import tseslint from 'typescript-eslint';
 
 const eslintConfig = defineConfig(
@@ -30,42 +30,6 @@ const eslintConfig = defineConfig(
   },
   {
     rules: {
-      'import/order': [
-        'error',
-        {
-          groups: [
-            'builtin',
-            'external',
-            'parent',
-            'sibling',
-            'index',
-            'object',
-            'type',
-          ],
-
-          pathGroups: [
-            {
-              pattern: '{react,react-dom/**,react-router-dom}',
-              group: 'builtin',
-              position: 'before',
-            },
-            {
-              pattern: '@/**',
-              group: 'parent',
-              position: 'before',
-            },
-          ],
-
-          pathGroupsExcludedImportTypes: ['builtin'],
-
-          alphabetize: {
-            order: 'asc',
-          },
-
-          'newlines-between': 'always',
-        },
-      ],
-
       '@typescript-eslint/consistent-type-imports': [
         'error',
         {
